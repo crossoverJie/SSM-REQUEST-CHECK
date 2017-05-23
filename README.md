@@ -74,3 +74,12 @@ mvn install
     }
 ```
 
+## 自定义缓存前缀、时间
+> 默认缓存前缀是`reqNo`,时间为1天。
+
+```
+#redis前缀
+redis.prefixReq=reqNo
+#redis缓存时间 默认单位为天
+redis.day=1
+```
