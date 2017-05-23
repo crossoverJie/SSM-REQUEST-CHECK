@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.RedisConnectionFailureException;
@@ -26,8 +27,14 @@ public class ReqNoDrcAspect {
 	
 
 	private static Logger logger = LoggerFactory.getLogger(ReqNoDrcAspect.class);
-	private static final String REQNO ="reqNo" ;
-	
+
+
+	@Value("${redis.prefixReq:reqNo}")
+	private String prefixReq ;
+
+	@Value("${redis.day:1}")
+	private long day ;
+
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
 	
@@ -51,11 +58,11 @@ public class ReqNoDrcAspect {
 				throw new RuntimeException("reqNo不能为空");
 			}else{
 				try {
-					String tempReqNo = redisTemplate.opsForValue().get(REQNO +reqNo);
+					String tempReqNo = redisTemplate.opsForValue().get(prefixReq +reqNo);
 					logger.debug("tempReqNo="+tempReqNo);
 
 					if((StringUtil.isEmpty(tempReqNo))){
-						redisTemplate.opsForValue().set(REQNO +reqNo, reqNo, 1, TimeUnit.DAYS);
+						redisTemplate.opsForValue().set(prefixReq + reqNo, reqNo, day, TimeUnit.DAYS);
 					}else{
 						throw new RuntimeException("请求号重复,reqNo="+reqNo);
 					}
