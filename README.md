@@ -10,9 +10,10 @@ https://crossoverjie.top/2017/05/24/SSM14/
 # 简介
 基于annotation的http去重插件：
 
-- redis保存请求。
-- Spring AOP 进行切面。
+- `Redis`保存请求。
+- `Spring AOP` 进行切面。
 
+**后续会用`Spring Boot`重构**
 
 # 安装
 ```
