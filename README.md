@@ -47,6 +47,23 @@ mvn install
 
 ## 开启CGLIB代理
 
+> 需要根据自己`web.xml`中定义的
+```xml
+    <!-- Spring MVC servlet -->
+    <servlet>
+        <servlet-name>SpringMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
+```
+`spring-mvc.xml`文件中配置：
+
+
 ```xml
 <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
 ```
