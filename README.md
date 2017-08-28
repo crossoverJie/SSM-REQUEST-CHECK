@@ -1,3 +1,6 @@
+# 开发
+https://crossoverjie.top/2017/05/24/SSM14/
+
 # 预览
 ![重复请求号01.jpg](https://ooo.0o0.ooo/2017/05/24/59245e69e35d5.jpg)
 ![重复请求号02.jpg](https://ooo.0o0.ooo/2017/05/24/59245e6a643ea.jpg)
@@ -7,9 +10,10 @@
 # 简介
 基于annotation的http去重插件：
 
-- redis保存请求。
-- Spring AOP 进行切面。
+- `Redis`保存请求。
+- `Spring AOP` 进行切面。
 
+**后续会用`Spring Boot`重构**
 
 # 安装
 ```
@@ -42,6 +46,23 @@ mvn install
 ```
 
 ## 开启CGLIB代理
+
+> 需要根据自己`web.xml`中定义的
+```xml
+    <!-- Spring MVC servlet -->
+    <servlet>
+        <servlet-name>SpringMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
+```
+`spring-mvc.xml`文件中配置：
+
 
 ```xml
 <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
@@ -83,3 +104,8 @@ redis.prefixReq=reqNo
 #redis缓存时间 默认单位为天
 redis.day=1
 ```
+
+# 联系作者
+- [crossoverJie@gmail.com](mailto:crossoverJie@gmail.com)
+
+![weixinchat.jpg](https://ooo.0o0.ooo/2017/04/25/58ff4d5fd9fa3.jpg)
