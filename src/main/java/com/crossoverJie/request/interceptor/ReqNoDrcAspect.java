@@ -1,7 +1,7 @@
 package com.crossoverJie.request.interceptor;
 
 
-import com.crossoverJie.req.BaseRequest;
+import com.crossoverJie.request.req.BaseRequest;
 import com.crossoverJie.request.util.StringUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,8 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -50,8 +48,7 @@ public class ReqNoDrcAspect {
 
 	@Before("checkRepeat()")
 	public void before(JoinPoint joinPoint) throws Exception {
-		BaseRequest request;
-		request = getBaseRequest(joinPoint);
+		BaseRequest request = getBaseRequest(joinPoint);
 		if(request != null){
 			final String reqNo = request.getReqNo();
 			if(StringUtil.isEmpty(reqNo)){
