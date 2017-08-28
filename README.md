@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/crossoverJie/SSM-REQUEST-CHECK.svg?branch=master)](https://travis-ci.org/crossoverJie/SSM-REQUEST-CHECK)
+
 # 开发
 https://crossoverjie.top/2017/05/24/SSM14/
 
